@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative School Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            color: #343a40;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .header {
+            background: #0056b3;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .header .school-info {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            left: 10px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: 500;
+        }
+
+        .header .school-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 5px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            padding-top: 60px; /* Adjust for the fixed header */
+            margin-left: 120px; /* Make space for the fixed sidebar */
+        }
+
+        .sidebar {
+            width: 120px;
+            background: #343a40;
+            color: white;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 60px; /* Position below the header */
+            left: 0;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+            transition: all 0.3s ease-in-out;
+            z-index: 90; /* Ensure sidebar is below header */
+        }
+
+        .sidebar h2 {
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar ul li a {
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            transform-style: preserve-3d;
+            transform: perspective(500px) rotateY(0deg);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            font-size: 0.7em;
+        }
+
+        .sidebar ul li a i {
+            margin-right: 5px;
+            font-size: 0.9em;
+        }
+
+        .sidebar ul li a:hover {
+            transform: perspective(500px) rotateY(5deg);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .content {
+            flex: 1;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            font-size: 0.8em;
+            width: 90%;
+            min-width: auto;
+            height: auto;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card h2 {
+            margin-bottom: 8px;
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.8em;
+            background: #e0e0e0;
+            color: #555;
+        }
+
+        /* Mobile View Styles */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; /* Stack items vertically */
+                padding-top: 60px; /* Adjust padding */
+            }
+
+            .sidebar {
+                width: 100%; /* Full width */
+                position: static; /* Flow with the document */
+                height: auto; /* Auto height */
+                box-shadow: none; /* Remove shadow */
+                overflow-y: auto;
+                top: 60px; /* Position below header */
+                left: 0; /* Align to the left */
+                z-index: 90; /* Ensure sidebar is below header */
+            }
+
+            .sidebar ul {
+                display: flex; /* Use flexbox */
+                flex-wrap: wrap; /* Wrap items */
+                justify-content: center; /* Center items */
+            }
+
+            .sidebar ul li {
+                margin: 5px; /* Add spacing between items */
+            }
+
+            .content {
+                margin-left: 0; /* Reset margin */
+            }
+
+            .card {
+                width: 90%; /* Adjust card width */
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="school-info">
+        <img src="school-logo.jpg" alt="School Logo">
+    </div>
+    <h1>Creative School Dashboard</h1>
+</header>
+
+<div class="container">
+    <aside class="sidebar">
+        <h2>Navigation</h2>
+        <ul>
+            <li><a href="#"><i class="fas fa-calendar-alt"></i> Class Routine</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Results</a></li>
+            <li><a href="#"><i class="fas fa-money-bill-alt"></i> Fees Payment</a></li>
+            <li><a href="#"><i class="fas fa-file-invoice-dollar"></i> Payment Details</a></li>
+            <li><a href="#"><i class="fas fa-bell"></i> Announcements</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
+    </aside>
+
+    <main class="content">
+        <div class="card">
+            <h2>Welcome</h2>
+            <p>Explore all features of the dashboard.</p>
+        </div>
+        <div class="card">
+            <h2>Upcoming Events</h2>
+            <p><strong>Sports Day:</strong> July 20th, 2024<br><strong>Science Fair:</strong> August 10th, 2024</p>
+        </div>
+        <div class="card">
+            <h2>Latest Announcements</h2>
+            <p>All assignments are due by Friday.<br>Parent-teacher meeting scheduled for next week.</p>
+        </div>
+        <div class="card">
+            <h2>Quick Links</h2>
+            <p><a href="#">Online Library</a><br><a href="#">Teacher Profiles</a><br><a href="#">Student Resources</a></p>
+        </div>
+    </main>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2024 Creative School. All Rights Reserved.</p>
+</footer>
+</body>
+</html>
